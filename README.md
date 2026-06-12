@@ -12,7 +12,7 @@ citing. Every claim is machine-checkable by running the scripts below.
 
 **1. Asymptotic expansion with certified constants**:
 
-    a(n) ~ C · α^n · n^(−5/2) · (1 + c₁/n + c₂/n² + ...)
+    a(n) ~ C · α^n · n^(−5/2) · (1 + c₁/n + c₂/n² + c₃/n³ + ...)
 
     α  = 2.81546003317615074652661677824269954253651...   (growth constant; = 1/ρ)
     ρ  = 0.355181742314377392882244473647632636708747...   (= OEIS A261340)
