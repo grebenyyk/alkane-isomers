@@ -16,12 +16,16 @@ beyond the leading term):
 
     a(n) ~ C · α^n · n^(−5/2) · (1 + c₁/n + c₂/n² + ...)
 
-    α  = 2.81546003317615074652661677824269954253651...   (growth constant)
-    ρ  = 1/α = 0.355181742314377392882244473647632636708747...
+    α  = 2.81546003317615074652661677824269954253651...   (growth constant; = 1/ρ)
+    ρ  = 0.355181742314377392882244473647632636708747...   (= OEIS A261340)
     C  = 0.65631869584183475...
     c₁ = 0.0300686950399...
     c₂ = 4.7882749807...
     c₃ ≈ 22.18
+
+The growth constant and ρ are published (Kotesovec 2015 on A000598; A261340);
+the unrooted amplitude C extends Finch's ~10 digits (§5.6.1); c₁–c₃ and the
+bounds below appear to be new.
 
 Certified empirical error bounds on 25 ≤ n ≤ 600: the 1-, 2-, 3-term
 truncations have relative error ≤ 0.276/n, 6.16/n², 35.5/n³ respectively.
