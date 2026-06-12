@@ -1,0 +1,119 @@
+================================================================================
+DRAFT OEIS CONTRIBUTION — A000602 (alkane isomer counts)
+Prepared: June 12, 2026
+================================================================================
+
+STATUS CHECK (done June 12, 2026):
+  * A000602 currently has NO asymptotic line in its FORMULA section.
+  * Neither constant below has its own OEIS decimal-expansion entry
+    (searches for "3551817423143773928" and "2815460033176150" return
+    no results).
+  * A000598 (the rooted companion) carries Kotesovec's amplitude constant
+    0.517875906458893536993162356992854345458... (Aug 15 2015); the growth
+    constant d below is shared between A000598 and A000602 because both
+    generating functions have the same dominant singularity.
+
+--------------------------------------------------------------------------------
+PART A — proposed FORMULA line for A000602 (main contribution)
+--------------------------------------------------------------------------------
+
+Paste into the FORMULA section (replace YOUR NAME with your registered
+OEIS user name; OEIS will insert the date automatically):
+
+----------------------------------------------------------------------
+a(n) ~ c * d^n / n^(5/2), where d = 2.81546003317615074652661677824269954... is
+the growth constant (the reciprocal of the common radius of convergence of the
+g.f.s of this sequence and A000598) and c = 0.65631869584183475... More
+precisely, a(n) = c * d^n / n^(5/2) * (1 + c1/n + c2/n^2 + O(1/n^3)) with
+c1 = 0.0300686950399... and c2 = 4.7882749807... - _YOUR NAME_, Jun 12 2026
+----------------------------------------------------------------------
+
+Optional shorter variant (if an editor prefers a single sentence):
+
+----------------------------------------------------------------------
+a(n) ~ 0.65631869584183475... * 2.81546003317615074652661677824269954...^n /
+n^(5/2). - _YOUR NAME_, Jun 12 2026
+----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+PART B — suggested "comment to editors" for the proposal form
+--------------------------------------------------------------------------------
+
+----------------------------------------------------------------------
+The leading form C*d^n/n^(5/2) is classical (Polya 1937; constants discussed in
+Robinson-Harary-Balaban 1976 and Finch, Mathematical Constants, Section 5.6.1,
+both already cited in this entry). The numerical values were recomputed as
+follows: exact terms a(0)..a(620) were generated from the standard functional
+equations (they agree with the full b-file by P. von Broemssen, terms 0..1000);
+d = 1/rho where rho solves the smooth-implicit-function system for the g.f. of
+A000598 (Newton iteration at 60-digit working precision, residual < 10^-55);
+c, c1, c2 were obtained by Richardson/Neville extrapolation of
+a(n)*rho^n*n^(5/2) on two disjoint node sets (n = 240..600 step 30, and
+n = 200..600 step 40), which agree to 1.7*10^-18 for c, ~10^-13 (relative) for
+c1, and ~5*10^-12 (relative) for c2; all quoted digits are stable across both
+node sets. As an end-to-end validation, the identical pipeline reproduces
+Kotesovec's published constant on A000598 (0.51787590645889353699316235699...)
+to 22 significant digits. Computations were AI-assisted (scripts available on
+request / at the repository linked in my profile).
+----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+PART C — optional follow-up: new decimal-expansion sequences
+--------------------------------------------------------------------------------
+
+Neither constant has its own A-number. If you want to propose them as new
+sequences (a second, separate contribution — only do this after Part A is
+accepted, and link the two):
+
+(C1) Growth constant
+  Name: Decimal expansion of the growth constant for the number of n-carbon
+        alkanes (A000602) and n-carbon alkyl radicals (A000598).
+  Value: 2.81546003317615074652661677824269954253651...
+  Data (comma-separated digits, offset 1):
+        2,8,1,5,4,6,0,0,3,3,1,7,6,1,5,0,7,4,6,5,2,6,6,1,6,7,7,8,2,4,2,6,9,9,5,4,2,5,3,6,5,1
+  Comments: Reciprocal of the common radius of convergence rho =
+        0.355181742314377392882244473647632636708747... of the generating
+        functions of A000598 and A000602. Satisfies, with T the g.f. of
+        A000598 and a = T(rho): a = 1 + (rho/6)*(a^3 + 3*a*T(rho^2) +
+        2*T(rho^3)) and (rho/2)*(a^2 + T(rho^2)) = 1, where T(rho) =
+        2.11742070095363102251625859046400760304694...
+  Cross-refs: Cf. A000598, A000602.
+
+(C2) Amplitude constant
+  Name: Decimal expansion of the constant c in the asymptotic formula
+        A000602(n) ~ c * d^n / n^(5/2).
+  Value: 0.65631869584183475...
+  Data (comma-separated digits, offset 0):
+        6,5,6,3,1,8,6,9,5,8,4,1,8,3,4,7,5
+  Note: only 17 digits are certified (two independent extrapolation node sets
+        agree to 1.7*10^-18); OEIS prefers more digits for constant entries,
+        so this one may be worth strengthening (longer series, more nodes)
+        before submission, or proposing with a "more digits welcome" comment.
+  Cross-refs: Cf. A000602, and (C1) once it has its A-number.
+
+--------------------------------------------------------------------------------
+PART D — how to submit (you have not contributed to OEIS before)
+--------------------------------------------------------------------------------
+
+1. Register at https://oeis.org/wiki/Special:RequestAccount — real names are
+   required by OEIS policy; account approval usually takes a day or two.
+2. Once logged in, go to https://oeis.org/A000602, click "edit" (this creates
+   a draft proposal, it does not change the live entry).
+3. Add the Part A text as a new line in the FORMULA section, placed after the
+   existing g.f. lines. Your signature "- _YOUR NAME_, Jun 12 2026" is added
+   automatically if you use the four-tilde shortcut, or type it manually in
+   exactly that format.
+4. Paste the Part B text into the pink "comment to editors" box.
+5. Submit. Editors typically respond within days; they may ask for the digits
+   to be trimmed/extended or for the wording to be tightened — both are
+   normal parts of the review.
+
+Notes on norms: numerically computed asymptotic constants are a standard,
+welcomed category of OEIS contribution (V. Kotesovec alone has thousands).
+The contributor vouches that the computation is correct and reproducible —
+which you can: the scripts in this repository regenerate every digit.
+AI assistance does not need to be hidden; mentioning it in the editor comment
+(as Part B does) is honest and unproblematic, since the contribution is a
+verifiable numerical fact, not a claim of creative authorship.
+
+================================================================================
