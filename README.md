@@ -11,8 +11,7 @@ asks to be taken on trust.
 
 ## Results
 
-**1. Asymptotic expansion with certified constants** (apparently unpublished
-beyond the leading term):
+**1. Asymptotic expansion with certified constants**:
 
     a(n) ~ C · α^n · n^(−5/2) · (1 + c₁/n + c₂/n² + ...)
 
@@ -24,8 +23,7 @@ beyond the leading term):
     c₃ ≈ 22.18
 
 The growth constant and ρ are published (Kotesovec 2015 on A000598; A261340);
-the unrooted amplitude C extends Finch's ~10 digits (§5.6.1); c₁–c₃ and the
-bounds below appear to be new.
+the unrooted amplitude C extends Finch's ~10 digits (§5.6.1); c₁–c₃ and the bounds below appear to be new.
 
 Certified empirical error bounds on 25 ≤ n ≤ 600: the 1-, 2-, 3-term
 truncations have relative error ≤ 0.276/n, 6.16/n², 35.5/n³ respectively.
