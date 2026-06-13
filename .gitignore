@@ -9,3 +9,6 @@ latex.log
 # Python
 __pycache__/
 *.pyc
+
+# Internal notes
+oeis_contribution.txt
