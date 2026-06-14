@@ -29,9 +29,9 @@
 \newcommand{\seqA}{\textnormal{A000602}}
 \newcommand{\seqT}{\textnormal{A000598}}
 
-\title{Certified obstructions to a closed-form expression for the\\
+\title{Asymptotic constants and finite exclusion tests for the\\
 number of alkane isomers:\\
-\large computer-assisted non-existence certificates for the sequence A000602}
+\large computational notes on the sequence A000602}
 \author{}
 \date{June 12, 2026}
 
@@ -42,9 +42,9 @@ number of alkane isomers:\\
 Let $a(n)$ denote the number of structural isomers of the alkane
 $\mathrm{C}_n\mathrm{H}_{2n+2}$, i.e.\ the number of unlabeled, unrooted trees on
 $n$ vertices with maximum degree $4$ (OEIS \seqA). No exact closed form for
-$a(n)$ is known. We localize the obstruction and erect certified, exact-arithmetic
-perimeters around every mechanism that has historically produced exact formulas
-for nontrivial counting sequences. Specifically, we prove by rigorous modular
+$a(n)$ is known. We study several standard mechanisms that often lead to exact
+formulas for counting sequences, and give finite exact-arithmetic tests around
+them. Specifically, we prove by rigorous modular
 rank certificates, validated against $621$ exactly computed terms (cross-checked
 against the independently computed OEIS $b$-file), that: (i)~$a(n)$ satisfies
 \emph{no} polynomial-coefficient recurrence, homogeneous or inhomogeneous, in a
@@ -56,17 +56,19 @@ satisfies no algebraic equation of $y$-degree $\le 28$ within an analogous degre
 staircase, and no first-order algebraic differential equation of degree $\le 7$
 in each of $x$, $y$, $y'$; (iii)~$a(n)\bmod 2$ has $2$-kernel of size $\ge 31$
 (maximal growth through depth $4$) and $a(n)\bmod m$ is not eventually periodic
-with period $\le 200$ for $2\le m\le 7$, blocking digit-automatic closed forms.
+with period $\le 200$ for $2\le m\le 7$, giving finite evidence against small
+digit-automatic descriptions.
 We then prove that the \emph{labeled} analogue of the problem admits an exact
-two-index finite-sum closed form, locating the obstruction precisely in the
-unlabeled quotient: Burnside's lemma expresses $a(n)$ as a sum over the
+two-index finite-sum closed form, emphasizing that the unlabeled quotient is the
+main source of difficulty: Burnside's lemma expresses $a(n)$ as a sum over the
 partitions of $n$, an index set of unbounded dimension. Finally we show
-structurally why the one known mechanism for collapsing such sums to finite
-exact formulas --- Rademacher's modular circle method --- is unavailable: the
-generating function is governed by a mixed $(2,3)$-Mahler-type functional system
-whose singularities cascade toward a (conjecturally natural) boundary on the
-unit circle without any known transformation theory. Together these results give
-sharp necessary conditions that any future closed form must satisfy.
+structurally why the best-known mechanism for collapsing such sums to finite
+exact formulas --- Rademacher's modular circle method --- has no evident
+analogue here: the generating function is governed by a mixed
+$(2,3)$-Mahler-type functional system whose singularities cascade toward a
+(conjecturally natural) boundary on the unit circle without any known comparable
+transformation theory. Together these results give explicit finite constraints
+and a structural picture that any future closed form would have to address.
 \end{abstract}
 
 \tableofcontents
@@ -103,9 +105,10 @@ all $n\ge 1$?
 
 This note does not answer Question~\ref{q:A}. Its purpose is to demonstrate,
 with certificates that are rigorous modulo only the correctness of widely
-validated exact-arithmetic computations, that \emph{every known route to such a
-formula is blocked}, to quantify exactly \emph{how far} each route is blocked,
-and to isolate the unique structural obstruction. All computations are
+validated exact-arithmetic computations, that several standard routes to such a
+formula fail in substantial finite ranges, to quantify those ranges, and to
+record the structural source of difficulty suggested by the generating
+functions. All computations are
 reproducible from the scripts described in Appendix~\ref{app:repro}.
 
 \subsection{Why the question is sharp}
@@ -131,7 +134,8 @@ Rademacher's convergent series for the partition function $p(n)$
 below $\tfrac12$, is exactly such a directly evaluable formula, even though the
 generating function $\prod (1-x^k)^{-1}$ has the unit circle as a natural
 boundary. The mechanism enabling it --- modularity of the Dedekind eta function
---- will reappear in \S\ref{sec:structure} as precisely what $a(n)$ lacks.
+--- will reappear in \S\ref{sec:structure} as the kind of structure not known
+for $a(n)$.
 \end{remark}
 
 By contrast, the \emph{multiplicative} (relative-error) version of the question
@@ -194,18 +198,18 @@ degree-$4$ (valence) constraint is \emph{not} the obstruction; the unlabeled
 quotient is.
 \end{theorem}
 
-Section~\ref{sec:structure} assembles the structural picture: the Burnside sum
+Section~\ref{sec:structure} assembles a structural picture: the Burnside sum
 over partitions, the Otter cancellation that produces the exponent $-5/2$, the
 singularity cascade of the underlying mixed $(2,3)$-Mahler system, and the
-absence of a Rademacher mechanism. Section~\ref{sec:necessary} states the
-resulting necessary conditions on any solution of Question~\ref{q:A}.
+absence of an evident Rademacher mechanism. Section~\ref{sec:necessary} states
+the resulting constraints on possible solutions of Question~\ref{q:A}.
 
 \subsection*{Epistemic status}
 Theorems~\ref{thm:main-holo}--\ref{thm:main-autom} are computer-assisted. The
 underlying linear algebra is exact (machine-word arithmetic modulo primes
 $<2^{26}$, no floating point); the logical step from a full-rank computation to
 non-existence is a one-line lemma (Lemma~\ref{lem:rank}); the data feeding the
-matrices is certified in \S\ref{sec:data}. Implementation risk is controlled by
+matrices is verified in \S\ref{sec:data}. Implementation risk is controlled by
 decoy sequences with known positive answers (the guessers \emph{do} find the
 Catalan recurrence, the Catalan algebraic equation, and the Thue--Morse kernel)
 and by re-verification modulo a second prime. The propositions of
@@ -453,14 +457,13 @@ every ``exponential polynomial'' $\sum_i P_i(n)\beta_i^n$ with $\le 305$ terms).
 \end{corollary}
 
 \begin{remark}[Calibration of the region]
-The certified staircase $(r+1)(d+1)\lesssim 600$ is enormous relative to
-naturally occurring formulas: the minimal recurrences of virtually all classical
-closed-form sequences (central binomials, Catalan, Motzkin, Ap\'ery, Domb,
-families of lattice-path and constant-term sequences) have $(r+1)(d+1)\le 40$.
-A hypothetical hypergeometric formula for $a(n)$ would need to be two orders of
-magnitude more complex than any closed form ever encountered in enumerative
-combinatorics --- while reproducing a sequence whose defining structure
-(\S\ref{sec:structure}) predicts no recurrence at all.
+The certified staircase $(r+1)(d+1)\lesssim 600$ is large relative to many
+familiar examples: the minimal recurrences of numerous classical closed-form
+sequences (central binomials, Catalan, Motzkin, Ap\'ery, Domb, families of
+lattice-path and constant-term sequences) have $(r+1)(d+1)\le 40$. Thus any
+hypergeometric formula for $a(n)$, if it exists within this framework, would
+have to lie well outside the tested range, in a regime considerably larger than
+these common examples.
 \end{remark}
 
 %======================================================================
@@ -564,14 +567,14 @@ By Cobham's theorem \cite{Cobham1969} simultaneous $2$- and $3$-automaticity
 would force eventual periodicity, which (3) excludes up to period $200$.
 \end{remark}
 
-This blocks the last standard route to an exact formula for the \emph{residues}
-of $a(n)$, let alone $a(n)$ itself; it also rules out the possibility that
-$a(n)$ is one of the rare ``Mahler-automatic'' coincidences in which a
-$(2,3)$-mixed system degenerates to a digit rule. That degeneration, by the
-rigidity theory of Mahler equations (Adamczewski--Bell \cite{AdamczewskiBell2017},
-Sch\"afke--Singer \cite{SchafkeSinger2019}), happens essentially only for
-rational functions --- and $A(x)$ is certified non-rational with vast margin by
-Theorem~\ref{thm:alg}.
+This rules out small tested versions of a standard route to exact formulas for
+the \emph{residues} of $a(n)$, let alone $a(n)$ itself; it is also consistent
+with the expectation that $a(n)$ is not one of the rare ``Mahler-automatic''
+coincidences in which a $(2,3)$-mixed system degenerates to a digit rule. Such
+degenerations are strongly constrained by the rigidity theory of Mahler
+equations (Adamczewski--Bell \cite{AdamczewskiBell2017}, Sch\"afke--Singer
+\cite{SchafkeSinger2019}), and the low-complexity rational/algebraic
+possibilities are excluded here by Theorem~\ref{thm:alg}.
 
 %======================================================================
 \section{The labeled problem has a closed form}\label{sec:labeled}
@@ -637,15 +640,14 @@ order. Equation \eqref{eq:burnside} \emph{is} an exact formula --- but its index
 set is the set of partitions of $n$: $p(n)\sim e^{\pi\sqrt{2n/3}}/(4n\sqrt3)$
 terms, indexed by integer vectors of \emph{unbounded length}. A fixed-depth
 finite sum in the sense of Question~\ref{q:A} has an index set of bounded
-dimension growing polynomially. The combinatorial content of
-Theorems~\ref{thm:holo}--\ref{thm:autom} is that no collapse of
-\eqref{eq:burnside} to bounded depth exists within the holonomic, algebraic, or
-automatic worlds. (For trees, $\fix(\lambda)$ is supported on special $\lambda$
-and is computed in practice through \eqref{eq:T}--\eqref{eq:A}; the partition
-sum is a faithful image of the substitutions $x\mapsto x^m$ in
-\eqref{eq:T}--\eqref{eq:A}.)
+dimension growing polynomially. The combinatorial message of
+Theorems~\ref{thm:holo}--\ref{thm:autom} is that no such collapse is found in
+the tested holonomic, algebraic, or automatic ranges. (For trees,
+$\fix(\lambda)$ is supported on special $\lambda$ and is computed in practice
+through \eqref{eq:T}--\eqref{eq:A}; the partition sum is a faithful image of the
+substitutions $x\mapsto x^m$ in \eqref{eq:T}--\eqref{eq:A}.)
 
-The one known precedent for such a collapse is instructive.
+A useful precedent for such a collapse is instructive.
 
 \begin{remark}[The Rademacher precedent]\label{rem:rademacher}
 $p(n)$ itself is the orbit-count-like coefficient of a natural-boundary
@@ -659,9 +661,9 @@ p(n)=\frac{1}{\pi\sqrt2}\sum_{k=1}^{O(\sqrt n)}A_k(n)\,\sqrt{k}\;
 directly evaluable and exact after rounding \cite{Rademacher1937}. Every step of
 its proof consumes the $\mathrm{SL}_2(\ZZ)$-modularity of
 $x^{1/24}/\eta(\tau)$: the circle method needs an exact transformation law at
-\emph{every} rational point of the boundary. Thus ``natural boundary''
-per se is not the obstruction to Question~\ref{q:A}; \emph{natural boundary
-without a transformation group} is.
+\emph{every} rational point of the boundary. Thus a ``natural boundary'' per se
+is not necessarily an obstruction to Question~\ref{q:A}; the apparent absence of
+a transformation group is the more relevant difficulty.
 \end{remark}
 
 \subsection{The singular structure of the alkane system}
@@ -717,11 +719,11 @@ analytic and nondegenerate there, $\det J \neq 0$). The displayed cancellation
 is exact and is the celebrated mechanism of Otter \cite{Otter1948}: unrooting
 shifts the polynomial growth from $n^{-3/2}$ (rooted) to $n^{-5/2}$ (unrooted).
 This is the structural reason the constants of \eqref{eq:asym} exist; it is also
-the reason \emph{no new} closed-form structure appears at the dominant
-singularity --- the local behavior is generic square-root, indistinguishable
-from that of any other simple variety of trees, with all arithmetic specificity
-pushed into the constants $\rho,a,b,C,c_1,\dots$, none of which is known (or
-expected) to be expressible in classical constants.
+the reason the dominant singularity alone does not reveal a closed-form
+mechanism --- the local behavior is generic square-root, indistinguishable from
+that of any other simple variety of trees, with all arithmetic specificity pushed
+into the constants $\rho,a,b,C,c_1,\dots$, none of which is known to be
+expressible in classical constants.
 \end{proof}
 
 \subsubsection{The cascade and the (conjectural) natural boundary}
@@ -735,8 +737,8 @@ points, $|x|\approx0.7084$), and inductively at solutions of
 $x^{2^a3^b}=\rho$, of moduli $\rho^{1/(2^a3^b)}\to1^-$, with arguments
 equidistributing on the circle. Granting that no unexpected cancellation kills
 any of these (each finite instance is numerically checkable; the cancellation at
-$\rho$ itself, Proposition~\ref{prop:otter}, is the unique structurally forced
-one), the singularities of $T$, hence of $A$, accumulate densely on $|x|=1$:
+$\rho$ itself, Proposition~\ref{prop:otter}, is the structurally forced one),
+the singularities of $T$, hence of $A$, accumulate densely on $|x|=1$:
 the unit circle is a natural boundary.
 \end{proposition}
 
@@ -745,35 +747,35 @@ If Proposition~\ref{prop:cascade} holds, then $A$ has infinitely many
 singularities; since a D-finite function has only finitely many (the roots of
 its leading coefficient) \cite{Stanley1980}, $a(n)$ is not P-recursive for
 \emph{any} order and degree, and Corollary~\ref{cor:noWZ} holds with the region
-replaced by ``everywhere''. The certificates of \S\ref{sec:holo} are exactly the
-unconditional finite shadow of this statement.
+replaced by ``everywhere''. The certificates of \S\ref{sec:holo} may be viewed
+as an unconditional finite shadow of this conditional statement.
 \end{corollary}
 
-\subsubsection{No transformation theory}
+\subsubsection{No evident transformation theory}
 
 The substitution monoid acting in \eqref{eq:T}--\eqref{eq:A} is generated by
 $x\mapsto x^2$ and $x\mapsto x^3$: a \emph{mixed Mahler} structure. For pure
 $k$-Mahler equations there is a developed Galois/rigidity theory; its flagship
 results --- e.g.\ a series satisfying both a $p$-Mahler and a $q$-Mahler
 equation with multiplicatively independent $p,q$ must be rational
-\cite{AdamczewskiBell2017,SchafkeSinger2019} --- assert precisely that the
-$\{2,3\}$-mixed situation admits \emph{no} common structure except in trivial
-cases. This is the antithesis of the modular situation of
+\cite{AdamczewskiBell2017,SchafkeSinger2019} --- suggest that a
+$\{2,3\}$-mixed situation should not be expected to carry a common structure
+except in special cases. This contrasts with the modular situation of
 Remark~\ref{rem:rademacher}: $\eta$'s boundary singularities are all
 $\mathrm{SL}_2(\ZZ)$-equivalent, while the cascade points
-$\rho^{1/(2^a3^b)}\zeta$ of Proposition~\ref{prop:cascade} are equivalent under
-\emph{nothing}. A Rademacher-type exact formula for $a(n)$ would require an
-exact local expansion at every cascade point \emph{plus} a summable global
-organization of those expansions; no mathematical technology supplying either
-ingredient currently exists.
+$\rho^{1/(2^a3^b)}\zeta$ of Proposition~\ref{prop:cascade} are not known to be
+organized by a comparable group action. A Rademacher-type exact formula for
+$a(n)$ would require an exact local expansion at every cascade point \emph{plus}
+a summable global organization of those expansions; we know of no mathematical
+technology supplying either ingredient in this setting.
 
 %======================================================================
-\section{Necessary conditions on any solution of (A)}\label{sec:necessary}
+\section{Constraints on possible solutions of (A)}\label{sec:necessary}
 %======================================================================
 
 \begin{theorem}[Profile of a hypothetical closed form]\label{thm:profile}
 Any $F$ solving Question~\ref{q:A} (even only for all $n\ge n_0$, with
-$n_0\le 25$, say) must satisfy \emph{all} of the following.
+$n_0\le 25$, say) would have to satisfy the following constraints.
 \begin{enumerate}
 \item \textbf{Outside the WZ core.} If $F\in\mathcal{C}$
 (Definition~\ref{def:class}), its minimal (inhomogeneous) annihilating operator
@@ -790,17 +792,18 @@ degree $\le7$ per variable.
 $2$-kernel, $F\bmod3$ requires $\ge40$ of $3$-kernel; $F\bmod m$ is aperiodic
 (period $>200$) for $m\le7$. So $F$ cannot factor through any small
 finite-state functional of the digits of $n$.
-\item \textbf{Must implement the Burnside collapse.} $F$ must reproduce
+\item \textbf{Would need a Burnside collapse.} $F$ would have to reproduce
 \eqref{eq:burnside}, a partition-indexed sum of unbounded dimension, within a
 bounded-depth expression --- the only known precedent for which (Rademacher)
-consumed a modular transformation group that the alkane system provably lacks in
-its pure-Mahler shadow and is not known to possess in any form
+uses a modular transformation group; no comparable group is currently known for
+the alkane system or for its pure-Mahler shadow
 (\S\ref{sec:structure}).
 \item \textbf{Exponential precision.} By Proposition~\ref{prop:rounding}, $F$
-must beat the truncated asymptotic scale \eqref{eq:asym} by a factor
-$\alpha^{-n}n^{5/2}$: it must encode the constants
+would have to beat the truncated asymptotic scale \eqref{eq:asym} by a factor
+$\alpha^{-n}n^{5/2}$: it would have to encode the constants
 $\rho, C, c_1, c_2,\dots$ to unbounded accuracy, i.e.\ contain the full
-transcendental content of the singular expansion, not any finite part of it.
+asymptotic information of the singular expansion, not merely any fixed finite
+part of it.
 \end{enumerate}
 \end{theorem}
 
@@ -808,14 +811,14 @@ transcendental content of the singular expansion, not any finite part of it.
 Nothing above excludes: (i) exotic closed forms outside $\mathcal{C}$ (e.g.\
 involving $\lfloor\cdot\rfloor$ of irrational multiples, or special-function
 evaluations with $n$ in analytically nontrivial positions) --- though
-items (3) and (5) constrain these severely; (ii) a future
-``mixed-Mahler circle method'' supplying the missing transformation theory;
+items (3) and (5) constrain these meaningfully; (ii) a future
+``mixed-Mahler circle method'' supplying a currently absent transformation
+theory;
 (iii) larger certified perimeters (the method of \S\ref{sec:method} scales to
-thousands of terms with FFT-based convolution and block elimination). We regard
-(ii) as the genuine mathematical content of Question~\ref{q:A}: an exact formula
-for the alkane numbers is equivalent, in practice, to an exact asymptotic theory
-for mixed Mahler systems --- a theory whose first nontrivial instance would
-itself be a major result.
+thousands of terms with FFT-based convolution and block elimination). One
+possible deeper route to Question~\ref{q:A} would be an exact asymptotic theory
+for mixed Mahler systems; even a first nontrivial instance of such a theory
+would be substantial.
 \end{remark}
 
 %======================================================================
