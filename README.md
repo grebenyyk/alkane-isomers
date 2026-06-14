@@ -1,4 +1,4 @@
-# Alkane isomer counts (OEIS A000602): asymptotics and finite finite exclusion tests
+# Alkane isomer counts (OEIS A000602): asymptotics and finite exclusion tests
 
 Computational study of the sequence **A000602** — the number of structural
 isomers of the alkane CₙH₂ₙ₊₂, equivalently the number of unlabeled, unrooted
