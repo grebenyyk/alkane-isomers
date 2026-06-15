@@ -5,6 +5,7 @@
 *.toc
 *.synctex.gz
 latex.log
+.DS_Store
 
 # Python
 __pycache__/
@@ -12,3 +13,4 @@ __pycache__/
 
 # Internal notes
 oeis_contribution.txt
+/reading
