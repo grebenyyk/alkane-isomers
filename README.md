@@ -5,7 +5,7 @@ isomers of the alkane CₙH₂ₙ₊₂, equivalently the number of unlabeled, u
 trees on *n* vertices with maximum degree 4.
 
 **Provenance: the mathematics, code, and manuscript in this repository were
-assisted by Claude Fable 5 model.** See [PROVENANCE.md](PROVENANCE.md) before citing. The numerical claims and finite certificate searches are reproducible by running the scripts in this.
+assisted by Claude Fable 5 model.** See [PROVENANCE.md](PROVENANCE.md) before citing. The numerical claims and finite certificate searches are reproducible by running the scripts in this repository.
 
 ## Results
 
